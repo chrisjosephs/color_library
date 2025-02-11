@@ -80,3 +80,29 @@ class ColorForm extends EntityForm
     parent::save($entity, $form_state);
   }
 }
+
+
+//  get all the websafe colors
+public function buildForm(array $form, FormStateInterface $form_state)
+{
+  $options = [];
+
+  include_once drupal_get_path('module', 'color_library') . '/includes/websafe_colors.inc'; // Include the file
+
+  $websafe_colors = json_decode(file_get_contents(drupal_get_path('module', 'color_library') . '/includes/websafe_colors.inc'));
+
+  foreach ($websafe_colors as $hex => $name) {
+    $options['websafe-' . $hex]['name'] = $name;
+    $options['websafe-' . $hex]['hex_value'] = $hex;
+    $options['websafe-' . $hex]['description'] = '216 Web Safe Named css3 Colors';
+    $options['websafe-' . $hex]['tags'] = ['websafe', 'websafe colors', 'css3'];
+  }
+
+  // Query user-created colors (content entities):
+  $user_colors = \Drupal::entityTypeManager()->getStorage('user_color')->loadAll();
+  foreach ($user_colors as $color) {
+    $options[$color->id()] = $color->label() . ' (' . $color->getHexValue() . ')';
+  }
+
+  // ... rest of your form code
+}
