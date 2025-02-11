@@ -29,7 +29,7 @@ See: https://www.drupal.org/node/895232 for further information.
 
 ## MAINTAINERS
 
-Current maintainers for Drupal 10:
+Current maintainers:
 
 - Christopher Peter Josephs (Digibitsymicronanocyberweb) - https://www.drupal.org/u/xis23
 
