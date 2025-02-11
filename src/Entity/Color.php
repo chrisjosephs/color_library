@@ -40,19 +40,19 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   }
  * )
  */
-class UserColor extends ContentEntityBase implements UserColorInterface {
+class Color extends ContentEntityBase implements ColorInterface {
 
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields['id'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('ID'))
-      ->setDescription(t('The ID of the UserColor entity.'))
+      ->setDescription(t('The ID of the Color entity.'))
       ->setReadOnly(TRUE)
       ->setSetting('unsigned', TRUE)
       ->setCardinality(1);
 
     $fields['uuid'] = BaseFieldDefinition::create('uuid')
       ->setLabel(t('UUID'))
-      ->setDescription(t('The UUID of the UserColor entity.'))
+      ->setDescription(t('The UUID of the Color entity.'))
       ->setReadOnly(TRUE)
       ->setCardinality(1);
 

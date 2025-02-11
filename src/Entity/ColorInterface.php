@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\my_color_library\Entity;
+namespace Drupal\color_library\Entity;
 
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 
