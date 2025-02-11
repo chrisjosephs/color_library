@@ -1,0 +1,26 @@
+default_colors:
+  type: table
+  description: Stores default colors.
+  fields:
+    id:
+      type: serial
+      unsigned: true
+      not null: true
+    name:
+      type: varchar
+      length: 255
+      not null: true
+    hex_value:
+      type: varchar
+      length: 6 #RRGGBB
+      not null: true
+    rgb_value:
+      type: varchar
+      length: 255
+    css_variable: # LightGoldenRodYellow / $your-brand-name-color
+      type: varchar
+      length: 255
+    description:
+      type: text
+  primary key:
+    - id
