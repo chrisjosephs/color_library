@@ -9,13 +9,13 @@ The primary use case for this module is:
 
 Features:
 
-- Default colors are managed separately in the database, avoiding configuration bloat - these are the 147 CSS3 colors that are named.
+- Default colors are managed separately in the database, avoiding configuration bloat - these are the 216 CSS3 colors that are named.
 - User-created colors are managed as configuration entities, allowing for easy export/import.
 - The color selection widget combines both types of colors for a unified user experience.
 
 ## REQUIREMENTS
 
-DESCRIBE_MODULE_DEPENDENCIES_HERE
+Drupal 11 (will be tested on earlier versions shortly)
 
 ## INSTALLATION
 
