@@ -2,12 +2,12 @@
 
 namespace Drupal\color_library\Entity;
 
-use Drupal\Core\Config\Entity\ConfigEntityInterface;
+use Drupal\Core\Entity\ContentEntityInterface;
 
 /**
  * Provides an interface for defining Color entities.
  */
-interface ColorInterface extends ConfigEntityInterface {
+interface ColorInterface extends ContentEntityInterface {
 
   /**
    * Gets the Color hex value.

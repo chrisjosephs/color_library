@@ -1,6 +1,55 @@
 <?php
-
 /**
- * @file
- * Install, update and uninstall functions for the Color Library module.
+ * Implements hook_schema().
  */
+function color_library_schema() {
+  $schema['color'] = [
+    'description' => 'Stores User Color entities.',
+    'fields' => [
+      'cid' => [ // ID field (custom name)
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique User Color ID.',
+      ],
+      'uuid' => [
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'description' => 'Unique UUID.',
+      ],
+      'name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'The name of the color.',
+      ],
+      'hex_value' => [
+        'type' => 'varchar',
+        'length' => 7,
+        'not null' => TRUE,
+        'description' => 'The hexadecimal value of the color.',
+      ],
+      'rgb_value' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'The RGB value of the color.',
+      ],
+        'tags' => [
+            'type' => 'varchar',
+            'length' => 255,
+            'description' => 'Tags associated with the color.',
+        ],
+    ],
+    'primary key' => ['cid'], // Define the primary key
+    'unique keys' => [
+      'uuid' => ['uuid'], // Add a unique key for the UUID
+    ],
+    'indexes' => [ // Optional indexes for performance
+      'name' => ['name'],
+    ],
+  ];
+
+  return $schema;
+}
