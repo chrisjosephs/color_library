@@ -1,5 +1,5 @@
 name: 'Color Library'
 type: module
-description: 'Color entities that can be maintained and added via a color library to easily find and re-use existing colors.'
+description: 'A color library to easily find and re-use existing colors and manage color palettes.'
 package: Color Library
 core_version_requirement: ^10 || ^11
