@@ -1,0 +1,14 @@
+#color_library.ui:
+#  path: '/color-library'
+#  defaults:
+#    _controller: 'color_library.ui_builder:buildUi'
+  # requirements:
+  #  _custom_access: 'color_library.ui_builder:checkAccess'
+
+#color_library.settings:
+#  path: '/admin/config/media/color-library'
+#  defaults:
+#    _form: '\Drupal\color_library\Form\SettingsForm'
+#    _title: 'Color Library settings'
+#  requirements:
+#    _permission: 'administer color library'

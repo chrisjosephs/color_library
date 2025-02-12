@@ -50,6 +50,41 @@ function color_library_schema() {
       'name' => ['name'],
     ],
   ];
+  $schema['color_palette'] = [ // Table name (must match entity type ID)
+    'description' => 'Stores Color Palette entities.',
+    'fields' => [
+      'id' => [ // ID field
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique Color Palette ID.',
+      ],
+      'uuid' => [ // UUID field
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'description' => 'Unique UUID.',
+      ],
+      'name' => [ // Name field
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'The name of the color palette.',
+      ],
+      'colors' => [
+        'type' => 'blob',
+        'not null' => FALSE,
+        'description' => 'Serialized array of referenced color IDs.',
+      ],
+    ],
+    'primary key' => ['id'],
+    'unique keys' => [
+      'uuid' => ['uuid'],
+    ],
+    'indexes' => [
+      'name' => ['name'],
+    ],
+  ];
 
   return $schema;
 }

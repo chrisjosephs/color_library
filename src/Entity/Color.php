@@ -15,27 +15,27 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
  */
 
 #[ContentEntityType(
-    id : "color",
-    label: new TranslatableMarkup('Color'),
-    label_singular: new TranslatableMarkup('color item'),
-    label_plural: new TranslatableMarkup('color items'),
-    entity_keys: [
-      'id' => 'cid',
-      'label' => 'name',
-      'uuid' => 'uuid',
-      'published' => 'status',
-      'owner' => 'uid',
-    ],
-    links: [
-      "canonical" => "/admin/structure/colors/{color}",
-      "add-form" => "/admin/structure/colors/add",
-      "edit-form" => "/admin/structure/colors/{color}/edit",
-      "delete-form" => "/admin/structure/colors/{color}/delete",
-      "collection" => "/admin/structure/colors"
-     ],
-    admin_permission: "administer color entities",
-    field_ui_base_route: "entity.color.admin_form",
-    base_table: 'color',
+  id: "color",
+  label: new TranslatableMarkup('Color'),
+  label_singular: new TranslatableMarkup('color item'),
+  label_plural: new TranslatableMarkup('color items'),
+  entity_keys: [
+    'id' => 'cid',
+    'label' => 'name',
+    'uuid' => 'uuid',
+    'published' => 'status',
+    'owner' => 'uid',
+  ],
+  links: [
+    "canonical" => "/admin/structure/colors/{color}",
+    "add-form" => "/admin/structure/colors/add",
+    "edit-form" => "/admin/structure/colors/{color}/edit",
+    "delete-form" => "/admin/structure/colors/{color}/delete",
+    "collection" => "/admin/structure/colors"
+   ],
+  admin_permission: "administer color entities",
+  base_table: 'color',
+  field_ui_base_route: "entity.color.admin_form",
   )]
 
 class Color extends ContentEntityBase implements ColorInterface {
