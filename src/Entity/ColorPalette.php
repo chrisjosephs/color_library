@@ -45,6 +45,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
   ],
   admin_permission: "administer color palette entities",
   field_ui_base_route: "entity.color_palette.admin_form",
+  base_table: 'color_palette',
 )]
 
 class ColorPalette extends ContentEntityBase implements ColorPaletteInterface {
@@ -69,7 +70,7 @@ class ColorPalette extends ContentEntityBase implements ColorPaletteInterface {
     $fields['colors'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Colors'))
       ->setDescription(t('The colors in this palette.'))
-      ->setSetting('target_type', 'user_color')
+      ->setSetting('target_type', 'color')
       ->setSetting('handler', 'default')
       ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED);
 
@@ -93,5 +94,28 @@ class ColorPalette extends ContentEntityBase implements ColorPaletteInterface {
     $this->set('colors', $color_ids);
   }
 
+  public function addColor(\Drupal\color_library\Entity\ColorInterface $color) {
+    // TODO: Implement addColor() method.
+  }
+
+  public function removeColor(\Drupal\color_library\Entity\ColorInterface $color) {
+    // TODO: Implement removeColor() method.
+  }
+
+  public function getColorByName($name) {
+    // TODO: Implement getColorByName() method.
+  }
+
+  public function setColorByName($name, \Drupal\color_library\Entity\ColorInterface $color) {
+    // TODO: Implement setColorByName() method.
+  }
+
+  public function getColorByHex($hex) {
+    // TODO: Implement getColorByHex() method.
+  }
+
+  public function setColorByHex($hex, \Drupal\color_library\Entity\ColorInterface $color) {
+    // TODO: Implement setColorByHex() method.
+  }
 
 }

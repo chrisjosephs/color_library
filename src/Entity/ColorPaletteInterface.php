@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\my_color_library\Entity;
+namespace Drupal\color_library\Entity;
 
 use Drupal\color_library\Entity\ColorInterface;
 use Drupal\Core\Entity\ContentEntityInterface;
@@ -8,7 +8,7 @@ use Drupal\Core\Entity\ContentEntityInterface;
 /**
  * Provides an interface for defining ColorPalette entities.
  *
- * @ingroup my_color_library
+ * @ingroup color_library
  */
 interface ColorPaletteInterface extends ContentEntityInterface {
 
