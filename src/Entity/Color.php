@@ -142,7 +142,7 @@ class Color extends ContentEntityBase implements ColorInterface {
    * Check where this color is used to warn user if updated
    */
   public function whatUsesColor($id, ColorInterface $color) {
-    $additionalText = "This color is used in the following places: ";
+    $additionalText = "This color is used in the following places: @count, [@ places]";
     $additionalText2 = "Note: this won't update where you have used the colour in the WYSIWYG editor or in CSS files in the past, only entities that link to this color entity";
   }
 }
