@@ -42,8 +42,8 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
     "collection" => "/admin/structure/color_palettes",
   ],
   admin_permission: "administer color palette entities",
-  field_ui_base_route: "entity.color_palette.admin_form",
   base_table: 'color_palette',
+  field_ui_base_route: "entity.color_palette.admin_form",
 )]
 
 class ColorPalette extends ContentEntityBase implements ColorPaletteInterface {

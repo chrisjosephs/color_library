@@ -4,24 +4,54 @@ namespace Drupal\color_library\Entity;
 
 use Drupal\Core\Entity\Attribute\ContentEntityType;
 use Drupal\Core\Entity\ContentEntityBase;
+use Drupal\Core\Entity\ContentEntityDeleteForm;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Entity\EntityViewBuilder;
+use Drupal\Core\Entity\Form\DeleteMultipleForm;
+use Drupal\Core\Entity\Form\RevisionDeleteForm;
+use Drupal\Core\Entity\Form\RevisionRevertForm;
+use Drupal\Core\Entity\Routing\RevisionHtmlRouteProvider;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\media\ColorViewsData;
+use Drupal\media\MediaAccessControlHandler;
+use Drupal\media\MediaForm;
+use Drupal\media\MediaListBuilder;
+use Drupal\media\MediaStorage;
+use Drupal\media\MediaViewsData;
+use Drupal\media\Routing\MediaRouteProvider;
 
 /**
  * Defines the Color entity.
  */
 #[ContentEntityType(
-  id: "color",
+  id: 'color',
   label: new TranslatableMarkup('Color'),
-  label_singular: new TranslatableMarkup('color item'),
-  label_plural: new TranslatableMarkup('color items'),
+  label_singular: new TranslatableMarkup('color'),
+  label_plural: new TranslatableMarkup('colors'),
   entity_keys: [
     'id' => 'cid',
     'label' => 'name',
-    'uuid' => 'uuid',
-    'published' => 'status',
-    'owner' => 'uid',
+    'uuid' => 'uuid'
+  ],
+  handlers: [
+    'view_builder' => EntityViewBuilder::class,
+    //'list_builder' => MediaListBuilder::class,
+    // 'access' => MediaAccessControlHandler::class,
+    'form' => [
+   //   'default' => MediaForm::class,
+   //   'add' => MediaForm::class,
+    //  'edit' => MediaForm::class,
+      'delete' => ContentEntityDeleteForm::class,
+  ///    'delete-multiple-confirm' => DeleteMultipleForm::class,
+   //   'revision-delete' => RevisionDeleteForm::class,
+    //  'revision-revert' => RevisionRevertForm::class,
+    ],
+    'views_data' => ColorViewsData::class,
+    // 'route_provider' => [
+    //  'html' => MediaRouteProvider::class,
+    //  'revision' => RevisionHtmlRouteProvider::class,
+    //],
   ],
   links: [
     "canonical" => "/admin/structure/colors/{color}",
@@ -30,8 +60,12 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
     "delete-form" => "/admin/structure/colors/{color}/delete",
     "collection" => "/admin/structure/colors",
   ],
-  admin_permission: "administer color entities",
+  // admin_permission: "administer colors",
   base_table: 'color',
+  label_count: [
+    'singular' => '@count color',
+    'plural' => '@count colors',
+  ],
   field_ui_base_route: "entity.color.admin_form",
   )]
 
@@ -65,14 +99,7 @@ class Color extends ContentEntityBase implements ColorInterface {
       ->setDescription(t('The hex value of the color (e.g., #FF0000).'))
       ->setRequired(TRUE)
       ->setSetting('max_length', 7);
-    /**
-     *
-     * only get this, don't store it
-     * $fields['rgb_value'] = BaseFieldDefinition::create('string')
-     * ->setLabel(t('RGB Value'))
-     * ->setDescription(t('The RGB value of the color (e.g., rgb(255, 0, 0)).'))
-     * ->setSetting('max_length', 255);
-    */
+
     $fields['tags'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Tags'))
       ->setDescription(t('Comma-separated list of tags.'))

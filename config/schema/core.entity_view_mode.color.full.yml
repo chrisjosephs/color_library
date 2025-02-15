@@ -1,0 +1,10 @@
+langcode: en
+status: false
+dependencies:
+  module:
+    - color_library
+id: color.full
+label: 'Full content'
+description: ''
+targetEntityType: color
+cache: true

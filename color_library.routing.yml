@@ -12,3 +12,42 @@
 #    _title: 'Color Library settings'
 #  requirements:
 #    _permission: 'administer color library'
+entity.color.canonical:
+  path: '/admin/structure/colors/{color}' # Example path!
+  defaults:
+    _controller: '\Drupal\Core\Entity\Controller\EntityController::canonical'
+    _title_callback: '\Drupal\Core\Entity\Controller\EntityController::entityTitle'
+  requirements:
+    _permission: 'administer colors' # Your permission
+
+entity.color.add_form:
+  path: '/admin/structure/colors/add' # Example path!
+  defaults:
+    _entity_form: 'color.add'
+    _title: 'Add Color'
+  requirements:
+    _permission: 'administer colors'
+
+entity.color.edit_form:
+  path: '/admin/structure/colors/{color}/edit' # Example path!
+  defaults:
+    _entity_form: 'color.edit'
+    _title: 'Edit Color'
+  requirements:
+    _permission: 'administer colors'
+
+entity.color.delete_form:
+  path: '/admin/structure/colors/{color}/delete' # Example path!
+  defaults:
+    _entity_form: 'color.delete'
+    _title: 'Delete Color'
+  requirements:
+    _permission: 'administer colors'
+
+entity.color.collection:
+  path: '/admin/structure/colors' # Example path!
+  defaults:
+    _controller: '\Drupal\Core\Entity\Controller\EntityListController::listing'
+    _title: 'Colors'
+  requirements:
+    _permission: 'administer colors'
