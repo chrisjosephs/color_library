@@ -30,17 +30,11 @@ function color_library_schema() {
         'not null' => TRUE,
         'description' => 'The hexadecimal value of the color.',
       ],
-      'rgb_value' => [
-        'type' => 'varchar',
-        'length' => 255,
-        'not null' => TRUE,
-        'description' => 'The RGB value of the color.',
+      'tags' => [
+          'type' => 'varchar',
+          'length' => 255,
+          'description' => 'Tags associated with the color.',
       ],
-        'tags' => [
-            'type' => 'varchar',
-            'length' => 255,
-            'description' => 'Tags associated with the color.',
-        ],
     ],
     'primary key' => ['cid'], // Define the primary key
     'unique keys' => [
