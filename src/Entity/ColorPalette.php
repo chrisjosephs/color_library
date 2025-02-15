@@ -13,9 +13,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
  * Defines the ColorPalette entity.
  *
  * @ingroup color_library
- *
 */
-
 #[ContentEntityType(
   id: "color_palette",
   label: new TranslatableMarkup("Color Palette"),
@@ -30,7 +28,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
     "form" => [
       "add" => "Drupal\my_color_library\Form\ColorPaletteForm",
       "edit" => "Drupal\my_color_library\Form\ColorPaletteForm",
-      "delete" => "Drupal\my_color_library\Form\ColorPaletteDeleteForm"
+      "delete" => "Drupal\my_color_library\Form\ColorPaletteDeleteForm",
     ],
     "route_provider" => [
       "html" => "Drupal\Core\Entity\Routing\AdminHtmlRouteProvider",
@@ -41,7 +39,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
     "add-form" => "/admin/structure/color_palettes/add",
     "edit-form" => "/admin/structure/color_palettes/{color_palette}/edit",
     "delete-form" => "/admin/structure/color_palettes/{color_palette}/delete",
-    "collection" => "/admin/structure/color_palettes"
+    "collection" => "/admin/structure/color_palettes",
   ],
   admin_permission: "administer color palette entities",
   field_ui_base_route: "entity.color_palette.admin_form",
@@ -50,6 +48,9 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 class ColorPalette extends ContentEntityBase implements ColorPaletteInterface {
 
+  /**
+   *
+   */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields['id'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('ID'))
@@ -77,45 +78,75 @@ class ColorPalette extends ContentEntityBase implements ColorPaletteInterface {
     return $fields;
   }
 
-  // Getters and setters (optional, but good practice):
+  /**
+   * Getters and setters (optional, but good practice):
+   */
   public function getName() {
     return $this->get('name')->value;
   }
 
+  /**
+   *
+   */
   public function setName($name) {
     $this->set('name', $name);
   }
 
+  /**
+   *
+   */
   public function getColors() {
-    return $this->get('colors')->referencedEntities(); // Returns an array of UserColor entities
+    // Returns an array of UserColor entities.
+    return $this->get('colors')->referencedEntities();
   }
 
+  /**
+   *
+   */
   public function setColorIds(array $color_ids) {
     $this->set('colors', $color_ids);
   }
 
-  public function addColor(\Drupal\color_library\Entity\ColorInterface $color) {
-    // TODO: Implement addColor() method.
+  /**
+   *
+   */
+  public function addColor(ColorInterface $color) {
+    // @todo Implement addColor() method.
   }
 
-  public function removeColor(\Drupal\color_library\Entity\ColorInterface $color) {
-    // TODO: Implement removeColor() method.
+  /**
+   *
+   */
+  public function removeColor(ColorInterface $color) {
+    // @todo Implement removeColor() method.
   }
 
+  /**
+   *
+   */
   public function getColorByName($name) {
-    // TODO: Implement getColorByName() method.
+    // @todo Implement getColorByName() method.
   }
 
-  public function setColorByName($name, \Drupal\color_library\Entity\ColorInterface $color) {
-    // TODO: Implement setColorByName() method.
+  /**
+   *
+   */
+  public function setColorByName($name, ColorInterface $color) {
+    // @todo Implement setColorByName() method.
   }
 
+  /**
+   *
+   */
   public function getColorByHex($hex) {
-    // TODO: Implement getColorByHex() method.
+    // @todo Implement getColorByHex() method.
   }
 
-  public function setColorByHex($hex, \Drupal\color_library\Entity\ColorInterface $color) {
-    // TODO: Implement setColorByHex() method.
+  /**
+   *
+   */
+  public function setColorByHex($hex, ColorInterface $color) {
+    // @todo Implement setColorByHex() method.
   }
 
 }

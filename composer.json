@@ -1,0 +1,37 @@
+{
+    "name": "drupal/color_library",
+    "type": "drupal-module",
+    "description": "Provides a library of color-related functions and utilities.",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Christopher Josephs (xis23)",
+            "email": "digibitsy@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "drupal/coder": "^8.2",
+        "squizlabs/php_codesniffer": "^3.11"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "platform": {
+            "php": "8.1"
+        },
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "extra": {
+        "php_codesniffer": {
+            "ignorePatterns": [
+                "*/vendor/*"
+            ]
+        }
+    },
+    "scripts": {
+        "phpcs": "./vendor/bin/phpcs --standard=Drupal .",
+        "phpcbf": "./vendor/bin/phpcbf --standard=Drupal ."
+    }
+}

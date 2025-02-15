@@ -43,5 +43,4 @@ interface ColorInterface extends ContentEntityInterface {
    */
   public function setHexValue($hex_value);
 
-
 }

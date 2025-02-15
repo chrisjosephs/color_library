@@ -1,14 +1,22 @@
 <?php
-// In your custom form element class:
 
+/**
+ * @file
+ * In your custom form element class:
+ */
+
+/**
+ *
+ */
 public function buildForm(array $form, FormStateInterface $form_state) {
   // ... (query both default and user colors as before)
-
   // Example search/filter (basic - improve as needed):
-  $search_term = $form_state->getValue('tag_search'); // Get search term from a text field
+  // Get search term from a text field.
+  $search_term = $form_state->getValue('tag_search');
   $filtered_options = [];
   foreach ($options as $key => $label) {
-    $color_data = explode('(', $label); // Split label to get color data
+    // Split label to get color data.
+    $color_data = explode('(', $label);
     $tags_string = '';
     if (strpos($key, 'default-') === 0) {
       $default_color_id = str_replace('default-', '', $key);
@@ -19,12 +27,13 @@ public function buildForm(array $form, FormStateInterface $form_state) {
         ->execute()
         ->fetchAssoc();
       $tags_string = $color_data_db['tags'];
-    } else {
+    }
+    else {
       $color = \Drupal::entityTypeManager()->getStorage('color')->load($key);
       $tags_string = $color->getTags();
     }
 
-    if (empty($search_term) || strpos(strtolower($tags_string), strtolower($search_term)) !== false) {
+    if (empty($search_term) || strpos(strtolower($tags_string), strtolower($search_term)) !== FALSE) {
       $filtered_options[$key] = $label;
     }
 
@@ -35,9 +44,12 @@ public function buildForm(array $form, FormStateInterface $form_state) {
     '#title' => $this->t('Search by Tag'),
     '#default_value' => $search_term,
     '#ajax' => [
-      'callback' => '::filterColorsCallback', // Callback to rebuild the select
-      'wrapper' => 'color-select-wrapper', // ID of the select element container
-      'event' => 'keyup', // Trigger on keyup
+  // Callback to rebuild the select.
+      'callback' => '::filterColorsCallback',
+  // ID of the select element container.
+      'wrapper' => 'color-select-wrapper',
+  // Trigger on keyup.
+      'event' => 'keyup',
       'progress' => [
         'type' => 'throbber',
         'message' => NULL,
@@ -48,16 +60,20 @@ public function buildForm(array $form, FormStateInterface $form_state) {
   $form['color'] = [
     '#type' => 'select',
     '#title' => $this->t('Select a Color'),
-    '#options' => $filtered_options, // Use the filtered options
+  // Use the filtered options.
+    '#options' => $filtered_options,
     '#default_value' => $this->defaultValue,
-    '#prefix' => '<div id="color-select-wrapper">', // Wrapper for AJAX updates
+  // Wrapper for AJAX updates.
+    '#prefix' => '<div id="color-select-wrapper">',
     '#suffix' => '</div>',
   ];
-
 
   return $form;
 }
 
+/**
+ *
+ */
 public function filterColorsCallback(array &$form, FormStateInterface $form_state) {
   return $form['color'];
 }

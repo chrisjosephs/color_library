@@ -2,6 +2,7 @@
 
 namespace Drupal\color_library\Plugin\Block;
 
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -10,7 +11,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides a color palette block that appears on entity edit pages in admin/edit pages to easily access colors and copy/paste them into whatever is being edited
+ * Provides a color palette block that appears on entity edit pages in admin/edit pages to easily access colors and copy/paste them into whatever is being edited.
  *
  * @Block(
  *   id = "entity_edit_admin_block",
@@ -28,6 +29,9 @@ class ColorPaletteBlock extends BlockBase implements ContainerFactoryPluginInter
     $this->routeMatch = $route_match;
   }
 
+  /**
+   *
+   */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
       $configuration,
@@ -44,23 +48,23 @@ class ColorPaletteBlock extends BlockBase implements ContainerFactoryPluginInter
   public function build() {
     // You can add any content you want to display in the block here.
     // For example, you could get the current entity being edited:
-
     $entity = $this->getCurrentEntity();
 
     $build = [];
     if ($entity) {
-        $build['#markup'] = '<p>' . $this->t('You are editing a @entity_type entity.', ['@entity_type' => $entity->getEntityType()->getLabel()]) . '</p>';
-        // Add more content based on the entity type or other criteria.
-        if($entity->getEntityTypeId() == 'node'){
-            $build['#markup'] .= '<p>This is a node</p>';
-        }
+      $build['#markup'] = '<p>' . $this->t('You are editing a @entity_type entity.', ['@entity_type' => $entity->getEntityType()->getLabel()]) . '</p>';
+      // Add more content based on the entity type or other criteria.
+      if ($entity->getEntityTypeId() == 'node') {
+        $build['#markup'] .= '<p>This is a node</p>';
+      }
 
-        if($entity->getEntityTypeId() == 'paragraph'){
-            $build['#markup'] .= '<p>This is a paragraph</p>';
-        }
+      if ($entity->getEntityTypeId() == 'paragraph') {
+        $build['#markup'] .= '<p>This is a paragraph</p>';
+      }
 
-    } else {
-        $build['#markup'] = '<p>' . $this->t('No entity is being edited.') . '</p>';
+    }
+    else {
+      $build['#markup'] = '<p>' . $this->t('No entity is being edited.') . '</p>';
     }
 
     return $build;
@@ -72,38 +76,36 @@ class ColorPaletteBlock extends BlockBase implements ContainerFactoryPluginInter
   protected function blockAccess(AccountInterface $account) {
     // Only show the block on admin pages and entity edit pages.
     /**
-     * @todo: this should just be managed from block configuration page really?
+     * @todo this should just be managed from block configuration page really?
      */
     $route_name = $this->routeMatch->getRouteName();
 
-    if ($route_name && strpos($route_name, 'entity.') === 0 && strpos($route_name, '.edit_form') !== false && \Drupal::service('path.matcher')->isFrontPage() == FALSE ) {
-        return AccessResult::allowedIf($account->hasPermission('access administration pages'));
+    if ($route_name && strpos($route_name, 'entity.') === 0 && strpos($route_name, '.edit_form') !== FALSE && \Drupal::service('path.matcher')->isFrontPage() == FALSE) {
+      return AccessResult::allowedIf($account->hasPermission('access administration pages'));
     }
 
     return AccessResult::forbidden();
   }
 
+  /**
+   * Helper function to get current entity.
+   *
+   * @return \Drupal\Core\Entity\ContentEntityInterface|null
+   */
+  protected function getCurrentEntity() {
 
-    /**
-     * Helper function to get current entity
-     *
-     * @return \Drupal\Core\Entity\ContentEntityInterface|null
-     */
-    protected function getCurrentEntity() {
+    $entity = NULL;
+    $route_match = \Drupal::routeMatch();
+    $parameters = $route_match->getParameters();
 
-        $entity = NULL;
-        $route_match = \Drupal::routeMatch();
-        $parameters = $route_match->getParameters();
-
-        foreach ($parameters as $parameter) {
-            if ($parameter instanceof \Drupal\Core\Entity\ContentEntityInterface) {
-                $entity = $parameter;
-                break;
-            }
-        }
-
-        return $entity;
+    foreach ($parameters as $parameter) {
+      if ($parameter instanceof ContentEntityInterface) {
+        $entity = $parameter;
+        break;
+      }
     }
 
+    return $entity;
+  }
 
 }

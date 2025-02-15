@@ -14,9 +14,9 @@ default_colors:
       type: varchar
       length: 6 #RRGGBB
       not null: true
-    rgb_value:
-      type: varchar
-      length: 255
+      # rgb_value:  // *GET* THIS ONLY but no need to store
+      # type: varchar
+      # length: 255
     css_variable: # LightGoldenRodYellow / $your-brand-name-color
       type: varchar
       length: 255

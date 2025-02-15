@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ruleset name="Color Library">
+  <description>Coding standard for Color Library Drupal module.</description>
+  <rule ref="Drupal"/>
+  <exclude-pattern>*/vendor/*</exclude-pattern>
+  <exclude-pattern type="relative">vendor/*</exclude-pattern>
+ </ruleset>

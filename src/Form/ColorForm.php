@@ -9,14 +9,12 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Provides a form for adding/editing Color entities.
  */
-class ColorForm extends EntityForm
-{
+class ColorForm extends EntityForm {
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state)
-  {
+  public function buildForm(array $form, FormStateInterface $form_state) {
     $entity = $this->entity;
 
     $form['label'] = [
@@ -32,8 +30,9 @@ class ColorForm extends EntityForm
       '#default_value' => $entity->getHexValue(),
       '#required' => TRUE,
       '#attributes' => [
-        'class' => ['color-picker'], // Class for JS color picker
-      ]
+    // Class for JS color picker.
+        'class' => ['color-picker'],
+      ],
     ];
 
     $form['rgb_value'] = [
@@ -50,7 +49,8 @@ class ColorForm extends EntityForm
     ];
 
     $form['tags'] = [
-      '#type' => 'textfield',  // Or 'entity_autocomplete' for managed tags
+    // Or 'entity_autocomplete' for managed tags.
+      '#type' => 'textfield',
       '#title' => $this->t('Tags'),
       '#default_value' => $entity->getTags(),
       '#description' => $this->t('Comma-separated list of tags.'),
@@ -62,29 +62,33 @@ class ColorForm extends EntityForm
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state)
-  {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     parent::submitForm($form, $form_state);
 
     $entity = $this->entity;
-    $this->save($entity, $form_state); // Important to pass form state
-    $form_state->setRedirect('entity.color.collection'); // Redirect to list page
+    // Important to pass form state.
+    $this->save($entity, $form_state);
+    // Redirect to list page.
+    $form_state->setRedirect('entity.color.collection');
   }
 
   /**
    * {@inheritdoc}
    */
-  public function save(EntityInterface|array $entity, FormStateInterface $form_state)
-  {
-    $entity->setHexValue(strtoupper($entity->getHexValue())); //Save hex value as uppercase.
+  public function save(EntityInterface|array $entity, FormStateInterface $form_state) {
+    // Save hex value as uppercase.
+    $entity->setHexValue(strtoupper($entity->getHexValue()));
     parent::save($entity, $form_state);
   }
-  //  get all the websafe colors
-  public function buildFormO(array $form, FormStateInterface $form_state)
-  {
+
+  /**
+   * Get all the websafe colors.
+   */
+  public function buildFormO(array $form, FormStateInterface $form_state) {
     $options = [];
 
-    include_once drupal_get_path('module', 'color_library') . '/includes/websafe_colors.inc'; // Include the file
+    // Include the file.
+    include_once drupal_get_path('module', 'color_library') . '/includes/websafe_colors.inc';
 
     $websafe_colors = json_decode(file_get_contents(drupal_get_path('module', 'color_library') . '/includes/websafe_colors.inc'));
 
@@ -105,5 +109,3 @@ class ColorForm extends EntityForm
   }
 
 }
-
-
