@@ -1,0 +1,19 @@
+add colors:
+  title: 'Add new Color entities'
+  description: 'Allow users to add new Color entities.'
+
+view published colors:
+  title: 'View published Color entities'
+  description: 'Allow users to view published Color entities.'
+
+view unpublished colors:
+  title: 'View unpublished Color entities'
+  description: 'Allow users to view unpublished Color entities.'
+
+edit colors:
+  title: 'Edit Color entities'
+  description: 'Allow users to edit Color entities.'
+
+delete colors:
+  title: 'Delete Color entities'
+  description: 'Allow users to delete Color entities.'

@@ -4,7 +4,7 @@
  */
 function color_library_schema() {
   $schema['color'] = [
-    'description' => 'Stores User Color entities.',
+    'description' => 'The base table for Color entities..',
     'fields' => [
       'cid' => [ // ID field (custom name)
         'type' => 'int',

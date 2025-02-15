@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\media;
+namespace Drupal\color_library;
 
 use Drupal\views\EntityViewsData;
 
@@ -14,6 +14,27 @@ class ColorViewsData extends EntityViewsData {
    */
   public function getViewsData() {
     $data = parent::getViewsData();
+
+    // Add any custom table joins or views-specific information.
+    $data['color']['table']['group'] = t('Colors');
+    $data['color']['table']['base'] = [
+      'field' => 'cid',
+      'title' => t('Color'),
+      'help' => t('The Color entity ID.'),
+    ];
+
+    // Add the hex_value field as a filterable field in Views.
+    $data['color']['hex_value'] = [
+      'title' => t('Hex Value'),
+      'help' => t('The hexadecimal value of the color.'),
+      'field' => [
+        'id' => 'standard',
+      ],
+      'filter' => [
+        'id' => 'string',
+      ],
+    ];
+
     return $data;
   }
 

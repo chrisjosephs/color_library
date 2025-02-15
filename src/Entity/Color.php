@@ -2,6 +2,8 @@
 
 namespace Drupal\color_library\Entity;
 
+use Drupal\color_library\ColorAccessControlHandler;
+use Drupal\color_library\ColorViewsData;
 use Drupal\Core\Entity\Attribute\ContentEntityType;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\ContentEntityDeleteForm;
@@ -13,13 +15,7 @@ use Drupal\Core\Entity\Form\RevisionRevertForm;
 use Drupal\Core\Entity\Routing\RevisionHtmlRouteProvider;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\media\ColorViewsData;
-use Drupal\media\MediaAccessControlHandler;
-use Drupal\media\MediaForm;
-use Drupal\media\MediaListBuilder;
-use Drupal\media\MediaStorage;
-use Drupal\media\MediaViewsData;
-use Drupal\media\Routing\MediaRouteProvider;
+
 
 /**
  * Defines the Color entity.
@@ -37,7 +33,7 @@ use Drupal\media\Routing\MediaRouteProvider;
   handlers: [
     'view_builder' => EntityViewBuilder::class,
     //'list_builder' => MediaListBuilder::class,
-    // 'access' => MediaAccessControlHandler::class,
+    'access' => ColorAccessControlHandler::class,
     'form' => [
    //   'default' => MediaForm::class,
    //   'add' => MediaForm::class,
