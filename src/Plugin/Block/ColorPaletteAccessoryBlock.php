@@ -12,14 +12,14 @@ use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides a color palette block that appears on entity edit pages in admin/edit pages to easily access colors and copy/paste them into whatever is being edited.
+ * Provides a color palette floating icon and modal interface block that appears on entity edit pages in admin/edit pages to easily access colors and copy/paste them into whatever is being edited.
  *
  * @Block(
- *   id = "color_palette_block",
- *   admin_label = @Translation("Color Palette Block"),
+ *   id = "color_palette_accessory",
+ *   admin_label = @Translation("Color Palette Floating Accessory"),
  * )
  */
-class ColorPaletteBlock extends BlockBase implements ContainerFactoryPluginInterface {
+class ColorPaletteAccessoryBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
   protected EntityTypeManagerInterface $entityTypeManager;
   protected RouteMatchInterface $routeMatch;

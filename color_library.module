@@ -4,3 +4,35 @@
  * @file
  * Primary module hooks for Color Library module.
  */
+
+/**
+ * Implements hook_block_info().
+ * Registers the Color Palette block to appear
+ */
+function color_library_block_info() {
+  $blocks['color_palette_accessory'] = [
+    'info' => t('Color Palette Floating'),
+    'region' => 'content',
+  ];
+  return $blocks;
+}
+/**
+ * Implements hook_block_view().
+ */
+function color_library_block_view($delta = '') {
+  if ($delta == 'color_palette_accessory') {
+    die;
+    $block = array();
+
+    $is_admin_path = \Drupal::service('path.matcher')->isFrontPage() ? FALSE : \Drupal::service('router.admin_context')->isAdminRoute();
+
+    if ($is_admin_path) { // Show on ALL admin pages.
+      $block['subject'] = t('Your Admin Block Title');
+      $block['content'] = 'Your admin block content here.';
+      return $block;
+    }
+
+    return NULL; // Hide the block on non-admin pages
+  }
+  return NULL; // Handle other deltas if needed
+}
