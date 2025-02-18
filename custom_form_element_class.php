@@ -5,9 +5,6 @@
  * In your custom form element class:
  */
 
-/**
- *
- */
 public function buildForm(array $form, FormStateInterface $form_state) {
   // ... (query both default and user colors as before)
   // Example search/filter (basic - improve as needed):
@@ -77,3 +74,4 @@ public function buildForm(array $form, FormStateInterface $form_state) {
 public function filterColorsCallback(array &$form, FormStateInterface $form_state) {
   return $form['color'];
 }
+

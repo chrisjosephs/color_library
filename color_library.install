@@ -6,7 +6,7 @@ function color_library_schema() {
   $schema['color'] = [
     'description' => 'The base table for Color entities..',
     'fields' => [
-      'cid' => [ // ID field (custom name)
+      'cid' => [
         'type' => 'int',
         'unsigned' => TRUE,
         'not null' => TRUE,
@@ -42,15 +42,15 @@ function color_library_schema() {
           'description' => 'Tags associated with the color.',
       ],
     ],
-    'primary key' => ['cid'], // Define the primary key
+    'primary key' => ['cid'],
     'unique keys' => [
-      'uuid' => ['uuid'], // Add a unique key for the UUID
+      'uuid' => ['uuid'],
     ],
-    'indexes' => [ // Optional indexes for performance
+    'indexes' => [
       'name' => ['name'],
     ],
   ];
-  $schema['color_palette'] = [ // Table name (must match entity type ID)
+  $schema['color_palette'] = [
     'description' => 'Stores Color Palette entities.',
     'fields' => [
       'id' => [ // ID field
