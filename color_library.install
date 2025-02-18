@@ -96,20 +96,9 @@ function color_library_schema() {
  * @todo: add something to reinstall this from the config menu
  */
 function color_library_install() {
-  // Get the block ID.
   $block_id = 'color_palette_accessory';
-
-  // Find a suitable region.  This is the key!
-  $region = _color_library_find_admin_region(); // Helper function (defined below)
   $system_theme = \Drupal::config('system.theme')->get('admin');
-
-
-  print_r($system_theme);
-
-
-
-  print("hhelllo!!");
-  print($region);die;
+  $region = _color_library_find_admin_region($system_theme); // Helper function (defined below)
   if ($region) {
     // Place the block programmatically.
     $block = \Drupal\block\Entity\Block::load($block_id);
@@ -126,7 +115,7 @@ function color_library_install() {
 /**
  * Helper function to find a suitable admin region.
  */
-function _color_library_find_admin_region() {
+function _color_library_find_admin_region($theme_name = NULL) {
   $regions = [
     'content',
     'admin_header',
@@ -137,26 +126,11 @@ function _color_library_find_admin_region() {
     'footer',
   ];
   // List all admin themes.
-  $theme_handler = \Drupal::service('theme_handler');
-  $themes = $theme_handler->listInfo();
-  $admin_themes = [];
-  foreach ($themes as $theme_name => $theme) {
-    print_r($theme->info['type']);
-    // Check if the theme is of type 'admin' and is enabled.
-    if (!empty($theme->info['type']) && $theme->info['type'] === 'admin') {
-      $admin_themes[$theme_name] = $theme;
-    }
-  }
-  print_r($admin_themes);
-  foreach ($admin_themes as $theme_name => $theme) {
-    if ($theme->getType() == 'admin' && $theme->status == 1) {
-      $theme_regions = system_region_list($theme_name);
-      foreach ($regions as $region) {
-        if (isset($theme_regions[$region])) {
-          return $region;
-        }
+  $theme_regions = system_region_list($theme_name);
+    foreach ($regions as $region) {
+      if (isset($theme_regions[$region])) {
+        return $region;
       }
     }
-  }
   return FALSE;
 }
