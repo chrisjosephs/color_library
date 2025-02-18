@@ -8,20 +8,21 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a color palette block that appears on entity edit pages in admin/edit pages to easily access colors and copy/paste them into whatever is being edited.
  *
  * @Block(
- *   id = "entity_edit_admin_block",
- *   admin_label = @Translation("Entity Edit Admin Block"),
+ *   id = "color_palette_block",
+ *   admin_label = @Translation("Color Palette Block"),
  * )
  */
 class ColorPaletteBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
-  protected $entityTypeManager;
-  protected $routeMatch;
+  protected EntityTypeManagerInterface $entityTypeManager;
+  protected RouteMatchInterface $routeMatch;
 
   public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, RouteMatchInterface $route_match) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
@@ -80,7 +81,8 @@ class ColorPaletteBlock extends BlockBase implements ContainerFactoryPluginInter
      */
     $route_name = $this->routeMatch->getRouteName();
 
-    if ($route_name && strpos($route_name, 'entity.') === 0 && strpos($route_name, '.edit_form') !== FALSE && \Drupal::service('path.matcher')->isFrontPage() == FALSE) {
+    if ($route_name && str_starts_with($route_name, 'entity.') && str_contains($route_name, '.edit_form') && !\Drupal::service('path.matcher')
+        ->isFrontPage()) {
       return AccessResult::allowedIf($account->hasPermission('access administration pages'));
     }
 
