@@ -23,8 +23,8 @@ class ColorViewsData extends EntityViewsData {
       'help' => t('The Color entity ID.'),
     ];
 
-    // Add the hex_value field as a filterable field in Views.
-    $data['color']['hex_value'] = [
+    // Add the hexadecimal field as a filterable field in Views.
+    $data['color']['hexadecimal'] = [
       'title' => t('Hex Value'),
       'help' => t('The hexadecimal value of the color.'),
       'field' => [

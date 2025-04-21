@@ -36,12 +36,12 @@ interface ColorInterface extends ContentEntityInterface {
   /**
    * Sets the Color hex value.
    *
-   * @param string $hex_value
+   * @param string $hexadecimal
    *   The new Color hex value.
    *
    * @return $this
    */
-  public function setHexValue($hex_value);
+  public function setHexValue($hexadecimal);
 
 
   /**

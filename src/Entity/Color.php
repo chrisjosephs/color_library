@@ -90,7 +90,7 @@ class Color extends ContentEntityBase implements ColorInterface {
       ->setRequired(TRUE)
       ->setSetting('max_length', 255);
 
-    $fields['hex_value'] = BaseFieldDefinition::create('string')
+    $fields['hexadecimal'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Hex Value'))
       ->setDescription(t('The hex value of the color (e.g., #FF0000).'))
       ->setRequired(TRUE)
@@ -134,7 +134,7 @@ class Color extends ContentEntityBase implements ColorInterface {
   /**
    *
    */
-  public function setHexValue($hex_value) {
+  public function setHexValue($hexadecimal) {
     // @todo Implement setHexValue() method.
   }
 

@@ -17,7 +17,7 @@ class ColorListBuilder extends ConfigEntityListBuilder {
    */
   public function buildRow(EntityInterface $entity) {
     $row['label'] = $entity->label();
-    $row['hex_value'] = $entity->getHexValue();
+    $row['hexadecimal'] = $entity->getHexValue();
     $row['description'] = $entity->getDescription();
     $row['id'] = $entity->id();
     $row['uuid'] = $entity->uuid();

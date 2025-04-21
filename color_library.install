@@ -24,7 +24,7 @@ function color_library_schema() {
         'not null' => TRUE,
         'description' => 'The name of the color.',
       ],
-      'hex_value' => [
+      'hexadecimal' => [
         'type' => 'varchar',
         'length' => 7,
         'not null' => TRUE,

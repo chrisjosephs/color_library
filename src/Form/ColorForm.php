@@ -24,7 +24,7 @@ class ColorForm extends EntityForm {
       '#required' => TRUE,
     ];
 
-    $form['hex_value'] = [
+    $form['hexadecimal'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Hex Value'),
       '#default_value' => $entity->getHexValue(),
@@ -94,7 +94,7 @@ class ColorForm extends EntityForm {
 
     foreach ($websafe_colors as $hex => $name) {
       $options['websafe-' . $hex]['name'] = $name;
-      $options['websafe-' . $hex]['hex_value'] = $hex;
+      $options['websafe-' . $hex]['hexadecimal'] = $hex;
       $options['websafe-' . $hex]['description'] = '216 Web Safe Named css3 Colors';
       $options['websafe-' . $hex]['tags'] = ['websafe', 'websafe colors', 'css3'];
     }
