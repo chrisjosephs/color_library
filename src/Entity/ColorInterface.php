@@ -43,9 +43,8 @@ interface ColorInterface extends ContentEntityInterface {
    */
   public function setHexValue($hexadecimal);
 
-
   /**
-   * Find references to this color entity (where it has been referenced by entity, rather than the values copy/pasted etc)
+   * Find references to this color entity token (where it has been referenced by entity, rather than the values copy/pasted etc)
    * @todo: also find references to the literal values??
    */
   public function whatUsesColor($id, ColorInterface $color);

@@ -22,7 +22,7 @@
 #    _permission: 'administer colors' # Your permission
 
 entity.color.add_form:
-  path: '/admin/structure/colors/add' # Example path!
+  path: '/admin/structure/colors/add'
   defaults:
     _entity_form: 'color.add'
     _title: 'Add Color'
@@ -30,7 +30,7 @@ entity.color.add_form:
     _permission: 'administer colors'
 
 entity.color.edit_form:
-  path: '/admin/structure/colors/{color}/edit' # Example path!
+  path: '/admin/structure/colors/{color}/edit'
   defaults:
     _entity_form: 'color.edit'
     _title: 'Edit Color'
@@ -38,7 +38,7 @@ entity.color.edit_form:
     _permission: 'administer colors'
 
 entity.color.delete_form:
-  path: '/admin/structure/colors/{color}/delete' # Example path!
+  path: '/admin/structure/colors/{color}/delete'
   defaults:
     _entity_form: 'color.delete'
     _title: 'Delete Color'
@@ -46,7 +46,7 @@ entity.color.delete_form:
     _permission: 'administer colors'
 
 entity.color.collection:
-  path: '/admin/structure/colors' # Example path!
+  path: '/admin/structure/colors'
   defaults:
     #   _controller: '\Drupal\Core\Entity\Controller\EntityListController::listing'
     _title: 'Colors'

@@ -22,6 +22,7 @@ Features:
 - Track colors against the css variables names that you are using
 - A view to expose your color data to headless frontends as json
 - Function to check where color is used to warn user where they will be updated if updated
+- Todo: compatible for exporting through Drupal GraphQL
 
 ## REQUIREMENTS
 
