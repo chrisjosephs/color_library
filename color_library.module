@@ -36,3 +36,27 @@ function color_library_block_view($delta = '') {
   }
   return NULL; // Handle other deltas if needed
 }
+/**
+ * Implements hook_tokens().
+ */
+function color_entity_tokens($type, $tokens, array $data = [], array $options = []) {
+  $replacements = [];
+
+  if ($type === 'color' && !empty($data['color']) && $data['color'] instanceof \Drupal\color_entity\Entity\Color) {
+    /** @var \Drupal\color_entity\Entity\Color $color */
+    $color = $data['color'];
+
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'name':
+          $replacements[$original] = $color->get('name')->value;
+          break;
+        case 'hex':
+          $replacements[$original] = $color->get('hex')->value;
+          break;
+      }
+    }
+  }
+
+  return $replacements;
+}

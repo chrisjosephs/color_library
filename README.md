@@ -2,7 +2,7 @@
 
 The Color Library module adds color entities that can be maintained by users and added via a color library to easily find and re-use existing colors.
 
-A major difference between this and the colorapi module is that colors are content entities rather than config entities which is better for content-driven model cases, and for User-generated colors or palettes (e.g., in a design tool), and when there is a need for revisions, moderation and in fields.
+A major difference between this and the colorapi module is that colors are content entities rather than config entities which is better for content-driven model cases, and for User-generated colors or palettes (e.g., in a design tool or when created by a dependant module's field), and when there is a need for revisions, moderation and in fields.
 *TODO: Can optionally integrate with ColorAPI module to manage global color tokens (e.g., primary, secondary colors) at the config level for config-driven model cases, still ensuring consistency across the site.
 
 The primary use case for this module is:
