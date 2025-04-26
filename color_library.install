@@ -110,6 +110,7 @@ function color_library_install() {
   else {
     \Drupal::logger('color_library')->warning(t('Could not find a suitable admin region to place the block.'));
   }
+  _color_library_websafe_colors_install();
 }
 
 /**
@@ -149,30 +150,26 @@ function _color_library_find_admin_region($theme_name = NULL) {
  *   Does not return a value. The function creates or updates the color entities
  *   based on the data in the provided JSON file.
  */
-function color_library_websafe_colors_install($container) {
-  // Get the entity type manager.
-  $entity_type_manager = $container->get('entity_type.manager');
-  // Get the entity storage for our color_entity.
-  $storage = $entity_type_manager->getStorage('color_entity');
-
-  // Get the path to the JSON file.
-  $json_path = drupal_get_path('module', 'color_entity') . '/colors.json';
-  // Read the JSON file.
+function _color_library_websafe_colors_install() {
+  $storage = \Drupal::entityTypeManager()->getStorage('color');
+  $json_path = \Drupal::service('extension.path.resolver')->getPath('module', 'color_library')
+    . '/src/websafe_colors.json';
   $json_data = file_get_contents($json_path);
-  // Decode the JSON data.
   $colors = json_decode($json_data, TRUE);
-
+  print_r($colors);
+  die;
   if (is_array($colors)) {
-    foreach ($colors as $color_id => $color_data) {
+    foreach ($colors as $color_hex => $color_name) {
       // Check if a color entity with this ID already exists.
       $existing_entities = $storage->loadByProperties(['id' => $color_id]); // Use ID here
-
       if (empty($existing_entities)) {
         // Create a new color entity.
         $color_entity = $storage->create([
           'id' => $color_id, // Use the color ID from the JSON as the entity ID.
-          'name' => $color_data['name'],
-          'hex_value' => $color_data['hex'],
+          'name' => $color_name,
+          'hexadecimal' => $color_hex,
+          'readonly' => TRUE,
+          'tags' => 'web-safe'
           // Add other fields as needed.
         ]);
 
@@ -182,8 +179,8 @@ function color_library_websafe_colors_install($container) {
       else {
         // If the entity exists, you could update it, or do nothing.
         $existing_entity = reset($existing_entities); //Get the first element of the array.
-        $existing_entity->setName($color_data['name']);
-        $existing_entity->setHexValue($color_data['hex']);
+        $existing_entity->setName($color_name);
+        $existing_entity->setHexValue($color_hex);
         $existing_entity->save();
       }
     }

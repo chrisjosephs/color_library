@@ -20,6 +20,8 @@ default_colors:
     css_variable: # LightGoldenRodYellow / $your-brand-name-color
       type: varchar
       length: 255
+    readonly:
+      type: boolean
     description:
       type: text
   primary key:
