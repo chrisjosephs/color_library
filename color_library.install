@@ -4,7 +4,7 @@
  */
 function color_library_schema() {
   $schema['color'] = [
-    'description' => 'The base table for Color entities..',
+    'description' => 'The base table for Color entities.',
     'fields' => [
       'cid' => [
         'type' => 'int',
@@ -93,7 +93,7 @@ function color_library_schema() {
 /**
  * Implements hook_install().
  * Install the color palette icon block no matter what theme is being used
- * @todo: add something to reinstall this from the config menu
+ * @todo: add an option to reinstall this from the config menu
  */
 function color_library_install() {
   $block_id = 'color_palette_accessory';
@@ -116,6 +116,7 @@ function color_library_install() {
  * Helper function to find a suitable admin region.
  */
 function _color_library_find_admin_region($theme_name = NULL) {
+  // these are the most common regions in themes though themes can override or remove these
   $regions = [
     'content',
     'admin_header',
@@ -125,7 +126,7 @@ function _color_library_find_admin_region($theme_name = NULL) {
     'page_bottom',
     'footer',
   ];
-  // List all admin themes.
+  // List all admin them regions
   $theme_regions = system_region_list($theme_name);
     foreach ($regions as $region) {
       if (isset($theme_regions[$region])) {

@@ -1,16 +1,16 @@
-uuid: d710abd6-7b4c-462f-81a7-3120ec3d9997
+uuid: 4ec5fa80-0daf-4d0a-90b0-4dfa9d333e94
 langcode: en
 status: true
 dependencies:
   module:
     - color_library
-id: color_library2
+id: color_library
 label: 'Color Library'
 module: views
-description: ''
+description: 'Find and manage colors.'
 tag: ''
 base_table: color
-base_field: nid
+base_field: cid
 display:
   default:
     id: default
@@ -18,6 +18,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
+      title: 'Color Library'
       fields:
         rendered_entity:
           id: rendered_entity
@@ -76,7 +77,7 @@ display:
         options:
           offset: 0
           pagination_heading_level: h4
-          items_per_page: 10
+          items_per_page: 24
           total_pages: null
           id: 0
           tags:
@@ -112,18 +113,8 @@ display:
       filters: {  }
       style:
         type: default
-        options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: true
-          uses_fields: false
       row:
-        type: fields
-        options:
-          default_field_elements: true
-          inline: {  }
-          separator: ''
-          hide_empty: false
+        type: 'entity:color'
       query:
         type: views_query
         options:
@@ -135,6 +126,21 @@ display:
       relationships: {  }
       header: {  }
       footer: {  }
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url.query_args
+      tags: {  }
+  page_1:
+    id: page_1
+    display_title: Page
+    display_plugin: page
+    position: 1
+    display_options:
+      display_extenders: {  }
+      path: admin/content/color-grid
     cache_metadata:
       max-age: -1
       contexts:

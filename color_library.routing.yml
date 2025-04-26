@@ -52,3 +52,12 @@ entity.color.collection:
     _title: 'Colors'
   requirements:
     _permission: 'administer colors'
+
+color_library.ui:
+  path: '/color-library'
+  defaults:
+    _controller: '\Drupal\color_library\Controller\ColorLibraryController::view'
+    _title: 'Color library'
+  requirements:
+    _permission: 'access color library'
+
