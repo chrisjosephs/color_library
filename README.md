@@ -2,15 +2,15 @@
 
 The Color Library module adds color entities that can be maintained by users and added via a color library to easily find and re-use existing colors.
 
-A major difference between this and the colorapi module is that colors are content entities rather than config entities which is better for content-driven model cases, and for User-generated colors or palettes (e.g., in a design tool or when created by a dependant module's field), and when there is a need for revisions, moderation and in fields.
+The difference between this and the color_field module is that colors can also be individually saved.  A major difference between this and the colorapi module is that colors are content entities rather than config entities which is better for content-driven model cases, and for User-generated colors or palettes (e.g., in a design tool or when created by a dependant module's field), and when there is a need for revisions, moderation and in fields. A full rationale is given at the end of this document.
 
 *TODO: Can optionally integrate with ColorAPI module which manages global color entities (e.g., primary, secondary colors) at the *config* level for config-driven model cases, still ensuring enforced consistency across the site.
 
 The primary use case for this module is:
 
-- Adding and removing colors to a color palette
+- Adding and removing colors to a color library with color palettes
 - Maintaining theme or brand colors for your website
-- Can be used by 'easy overlays' module for creating overlay and background effects on top of any node/entity's template
+- Can be used by 'Layer Styles' module for creating overlay and background effects to overlay or underlay any node/entity's template
 - Color Palette utility icon/block overlay can make it easy to copy and paste colors into any form element from your palettes of saved colors
 - Can be exported via views, also for headless websites
 
@@ -28,7 +28,7 @@ Features:
 - A view to expose your color data to headless frontends as json
 - Function to check where color is used to warn user where they will be updated if updated
 - Todo: compatible for exporting/creating through Drupal GraphQL
-- Todo: tags (currently comma listed 255 var field only)
+- Todo: tags (currently comma listed 255 var field only - break out into table)
 
 ## REQUIREMENTS
 
@@ -49,9 +49,9 @@ Current maintainers:
 - Christopher Peter Josephs (Digibitsymicronanocyberweb) - https://www.drupal.org/u/xis23
 
 
-  Why choose a **Color Entity** over a **Color Field** to manage colors?
+###  Why choose a **Color Entity** over a **Color Field** to manage colors?
 
-  Offers distinct advantages depending on your specific needs and the complexity of your color management requirements. Here's a breakdown of the advantages of using a Color Entity over a simple Color Field:
+Offers distinct advantages depending on your specific needs and the complexity of your color management requirements. Here's a breakdown of the advantages of using a Color Entity over a simple Color Field:
 
 **Advantages of a Color Entity:**
 
