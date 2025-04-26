@@ -2,9 +2,9 @@ default_colors:
   type: table
   description: Stores default colors.
   fields:
-    id:
-      type: serial
-      unsigned: true
+    cid:
+      type: varchar
+      length: 255
       not null: true
     name:
       type: varchar

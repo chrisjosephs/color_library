@@ -20,10 +20,10 @@ class ColorAccessControlHandler extends EntityAccessControlHandler {
     // Check permissions for operations (view, edit, delete).
     switch ($operation) {
       case 'view':
-        if (!$entity->isPublished()) {
+        // if (!$entity->isPublished()) { - always is published
           // For unpublished, allow access only to users with specific permission.
           return AccessResult::allowedIfHasPermission($account, 'view unpublished colors');
-        }
+        // }
         return AccessResult::allowedIfHasPermission($account, 'view published colors');
 
       case 'update':
@@ -39,9 +39,10 @@ class ColorAccessControlHandler extends EntityAccessControlHandler {
 
   /**
    * {@inheritdoc}
-   */
-  protected function checkCreateAccess(AccountInterface $account, array $context, EntityTypeInterface $entity_type) {
+
+  protected function checkCreateAccess(AccountInterface $account, array $context, EntityTypeInterface $entity_bundle = null) {
     // Check if the user has permission to create new colors.
     return AccessResult::allowedIfHasPermission($account, 'add colors');
   }
+   */
 }

@@ -15,6 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   name = "createColor",
  *   type = "Color",
  *   arguments = {
+ *     "cid" = "Color ID/Machine name"
  *     "name" = "String",
  *     "hexadecimal" = "String",
  *     "css_variable_name" = "String"
@@ -54,6 +55,7 @@ class CreateColor extends MutationPluginBase {
    */
   public function resolve(array $args) {
     $color = $this->entityTypeManager->getStorage('color')->create([
+      'cid' => $args['cid'],
       'name' => $args['name'],
       'hexadecimal' => $args['hexadecimal'],
       'css_variable_name' => $args['css_variable_name'],

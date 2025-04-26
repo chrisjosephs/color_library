@@ -1,6 +1,7 @@
 add colors:
   title: 'Add new Color entities'
   description: 'Allow users to add new Color entities.'
+  # restrict access: TRUE
 
 view published colors:
   title: 'View published Color entities'

@@ -7,10 +7,10 @@ function color_library_schema() {
     'description' => 'The base table for Color entities.',
     'fields' => [
       'cid' => [
-        'type' => 'int',
-        'unsigned' => TRUE,
+        'type' => 'varchar',
+        'length' => 255,
         'not null' => TRUE,
-        'description' => 'Primary Key: Unique User Color ID.',
+        'description' => 'Primary Key: Unique User Color machine name.',
       ],
       'uuid' => [
         'type' => 'varchar',
@@ -147,32 +147,32 @@ function _color_library_find_admin_region($theme_name = NULL) {
  *   entity type manager.
  *
  * @return void
- *   Does not return a value. The function creates or updates the color entities
- *   based on the data in the provided JSON file.
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
  */
-function _color_library_websafe_colors_install() {
+function _color_library_websafe_colors_install() {;
   $storage = \Drupal::entityTypeManager()->getStorage('color');
   $json_path = \Drupal::service('extension.path.resolver')->getPath('module', 'color_library')
     . '/src/websafe_colors.json';
   $json_data = file_get_contents($json_path);
   $colors = json_decode($json_data, TRUE);
-  print_r($colors);
-  die;
   if (is_array($colors)) {
     foreach ($colors as $color_hex => $color_name) {
       // Check if a color entity with this ID already exists.
-      $existing_entities = $storage->loadByProperties(['id' => $color_id]); // Use ID here
+      $color_id = strtolower(str_replace(' ', '_', $color_name));
+      $existing_entities = $storage->loadByProperties(['cid' => $color_id]); // Use ID here
+      print_r($color_id);
       if (empty($existing_entities)) {
         // Create a new color entity.
         $color_entity = $storage->create([
-          'id' => $color_id, // Use the color ID from the JSON as the entity ID.
+          'cid' => $color_id, // Use the color ID from the JSON as the entity ID.
           'name' => $color_name,
           'hexadecimal' => $color_hex,
           'readonly' => TRUE,
+          'css_variable_name' => $color_name,
           'tags' => 'web-safe'
           // Add other fields as needed.
         ]);
-
         // Save the entity to the database.
         $color_entity->save();
       }
@@ -185,4 +185,44 @@ function _color_library_websafe_colors_install() {
       }
     }
   }
+}
+
+/**
+ * Implements hook_uninstall().
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ */
+function color_library_preuninstall() {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  try {
+    $storage = $entity_type_manager->getStorage('color');
+  }
+  catch (\Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException $e) {
+    throw new \Drupal\Component\Plugin\Exception\PluginNotFoundException($e->getMessage());
+  }
+  catch (\Drupal\Component\Plugin\Exception\PluginNotFoundException $e) {
+    throw new \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException($e->getMessage());
+  }
+  // Select all color entities.
+  $entity_ids = $storage->getQuery()
+    ->accessCheck(FALSE) // Important: Disable access checks for uninstall.
+    ->execute();
+
+  // Load the entities.
+  $entities = $storage->loadMultiple($entity_ids);
+  // Delete the entities in a batch.
+  if (!empty($entities)) {
+    $storage->delete($entities);
+  }
+  //  Delete any field data
+  $field_storages = $entity_type_manager->getStorage('field_storage_config')->loadByProperties(['entity_type' => 'color']);
+  foreach ($field_storages as $field_storage) {
+    $field_storage->delete();
+  }
+  $entity_update_manager = \Drupal::entityDefinitionUpdateManager();
+  $entity_type = $entity_update_manager->getEntityType('color');
+  $entity_update_manager->uninstallEntityType($entity_type);
+  $entity_type_manager->clearCachedDefinitions();
 }

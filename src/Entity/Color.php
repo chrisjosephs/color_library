@@ -66,17 +66,16 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
   )]
 
 class Color extends ContentEntityBase implements ColorInterface {
-
   /**
    *
    */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
-    $fields['cid'] = BaseFieldDefinition::create('integer')
-      ->setLabel(t('ID'))
-      ->setDescription(t('The ID of the Color entity.'))
-      ->setReadOnly(TRUE)
-      ->setSetting('unsigned', TRUE)
-      ->setCardinality(1);
+    $fields['cid'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Color ID'))
+      ->setDescription(t('The unique ID of the color entity.'))
+      ->setRequired(TRUE)
+      ->setSetting('max_length', 255)
+      ->setSetting('is_ascii', TRUE);
 
     $fields['uuid'] = BaseFieldDefinition::create('uuid')
       ->setLabel(t('UUID'))
@@ -104,7 +103,7 @@ class Color extends ContentEntityBase implements ColorInterface {
     $fields['css_variable_name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Css Variable'))
       ->setDescription(t("The css variable name of the color to match the setting in your themes' css files."))
-      ->setRequired(TRUE)
+      ->setRequired(FALSE)
       ->setSetting('max_length', 255);
 
     return $fields;
