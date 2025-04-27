@@ -31,6 +31,8 @@ Features:
 - Todo: compatible for exporting/creating through Drupal GraphQL
 - Todo: tags (currently comma listed 255 var field only - break out into table)
 
+Color entities can be created individually, but they can also be added to palettes in a library, so for example you might have entities called "Light Blue", "Purple" etc, but then define palettes with "Call to Action Background", "Link Hover" that are semantically named.
+
 ## REQUIREMENTS
 
 Drupal 11 (will be tested on earlier versions shortly)

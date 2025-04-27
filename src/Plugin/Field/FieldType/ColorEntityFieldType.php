@@ -12,9 +12,9 @@ use Drupal\Core\TypedData\DataDefinition;
  * @FieldType(
  *   id = "color_entity_field",
  *   label = @Translation("Color Entity Field"),
- *   description = @Translation("A field to store color entity(s)."),
- *   default_widget = "color_library_widget",
- *   default_formatter = "string"
+ *   description = @Translation("A field to reference a color entity."),
+ *   default_widget = "entity_reference_autocomplete",
+ *   default_formatter = "entity_reference_label"
  * )
  */
 class ColorEntityFieldType extends FieldItemBase {
@@ -25,9 +25,10 @@ class ColorEntityFieldType extends FieldItemBase {
   public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
     $properties = [];
 
-    $properties['value'] = DataDefinition::create('string')
-      ->setLabel(t('Name value'))
-      ->setDescription(t('The name value of the item.'));
+    // Add a property to reference Color entity by its 'target_id'.
+    $properties['target_id'] = DataDefinition::create('integer')
+      ->setLabel(t('Referenced Color ID'))
+      ->setDescription(t('The ID of the referenced color entity.'));
 
     return $properties;
   }
@@ -38,9 +39,21 @@ class ColorEntityFieldType extends FieldItemBase {
   public static function schema(FieldStorageDefinitionInterface $field_definition) {
     return [
       'columns' => [
-        'value' => [
-          'type' => 'varchar',
-          'length' => 255,
+        // Reference target ID.
+        'target_id' => [
+          'type' => 'int',
+          'not null' => FALSE,
+        ],
+      ],
+      'indexes' => [
+        // Add an index for efficient lookups based on the referenced entity.
+        'target_id' => ['target_id'],
+      ],
+      'foreign keys' => [
+        // Create a foreign key to the 'color' entity table.
+        'target_id' => [
+          'table' => 'color', // Name of the referenced entity's table.
+          'columns' => ['target_id' => 'cid'], // Maps this field's target_id to the Color entity's 'cid'.
         ],
       ],
     ];
@@ -50,7 +63,7 @@ class ColorEntityFieldType extends FieldItemBase {
    * {@inheritdoc}
    */
   public function isEmpty() {
-    $value = $this->get('value')->getValue();
-    return $value === NULL || $value === '';
+    $target_id = $this->get('target_id')->getValue();
+    return empty($target_id);
   }
 }
