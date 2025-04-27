@@ -20,7 +20,8 @@ Features:
 - User-created colors are managed as content entities
 - Colors used by modules/fields are similarly saved to palettes named/tagged to the module
 - The color selection widget combines both types of colors for a unified user experience.
-- Tokens/$css-variables-names to allow paste into WYSIWYG (use both CID and the name)
+- todo: sort colors by most recently used colors by default so they appear at top of pallete for easy access.
+- Tokens/$css-variables-names to allow paste a color entity or color palette variable into WYSIWYG (use both CID and/or the name)
   - todo: try and encourage semantic tokens (primary-background instead of color name) or go off id: \[color:42:hex]
   - todo: colorapi config colors also as tokens
   - todo: switchable theme contexts
