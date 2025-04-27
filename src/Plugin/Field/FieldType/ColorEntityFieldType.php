@@ -17,7 +17,7 @@ use Drupal\Core\TypedData\DataDefinition;
  *   default_formatter = "string"
  * )
  */
-class NameFieldType extends FieldItemBase {
+class ColorEntityFieldType extends FieldItemBase {
 
   /**
    * {@inheritdoc}

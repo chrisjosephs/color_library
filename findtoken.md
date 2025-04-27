@@ -1,4 +1,4 @@
-You're right, for more robust and automated token tracking in Drupal programmatically (as of **April 21, 2025**), you'll need to leverage Drupal's APIs and potentially write custom code. Here's a breakdown of how you can approach this:
+Todo: for more robust and automated token tracking in Drupal programmatically (as of **April 21, 2025**), you'll need to leverage Drupal's APIs and potentially write custom code. Here's a breakdown of how you can approach this:
 
 **1. Utilizing the Configuration System:**
 

@@ -135,7 +135,14 @@ class Color extends ContentEntityBase implements ColorInterface {
    */
   public function setHexValue($hexadecimal) {
     // @todo Implement setHexValue() method.
-  }
+    }
+
+    /**
+     *
+     */
+    public function setName($name) {
+      // @todo Implement seName() method.
+    }
 
   /**
    * Check where this color is used to warn user if updated
