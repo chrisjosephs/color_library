@@ -28,9 +28,9 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
   entity_keys: [
     'id' => 'cid',
     'label' => 'name',
+    // 'langcode' => 'langcode',
     'uuid' => 'uuid',
     'revision' => 'vid',
-
   ],
   handlers: [
     'view_builder' => EntityViewBuilder::class,
@@ -61,7 +61,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
   base_table: 'color',
   revision_table: 'color_revision',
   revision_data_table: 'color_field_revision',
-  translatable: TRUE,
+  // translatable: TRUE,
   show_revision_ui: TRUE,
   // admin_permission: "administer colors",
   label_count: [
@@ -81,6 +81,12 @@ class Color extends ContentEntityBase implements ColorInterface {
    *
    */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
+    // Revision ID (vid) field
+    $fields['vid'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Revision ID'))
+      ->setDescription(t('The revision ID of the color entity.'))
+      ->setReadOnly(TRUE);
+
     $fields['cid'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Color ID'))
       ->setDescription(t('The unique ID of the color entity.'))
@@ -116,6 +122,39 @@ class Color extends ContentEntityBase implements ColorInterface {
       ->setDescription(t("The css variable name of the color to match the setting in your themes' css files."))
       ->setRequired(FALSE)
       ->setSetting('max_length', 255);
+    /* translatable
+       $fields['langcode'] = BaseFieldDefinition::create('language')
+         ->setLabel(t('Language code'))
+         ->setDescription(t('The language code for the color entity.'))
+         ->setRequired(TRUE)
+         ->setTranslatable(TRUE)
+         ->setRevisionable(TRUE); // Make it revisionable if revisions are enabled.
+
+
+       $fields['default_langcode'] = BaseFieldDefinition::create('boolean')
+         ->setLabel(t('Default language'))
+         ->setDescription(t('A flag indicating whether this is the default language version of the entity.'))
+         ->setReadOnly(TRUE)
+         ->setSetting('on_label', t('This is the default language version'))
+         ->setSetting('off_label', t('This is a translation'));
+       */
+    // Revisions
+    $fields['revision_uid'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Revision user'))
+      ->setDescription(t('The user ID of the user who created the revision.'))
+      ->setRevisionable(TRUE)
+      ->setSetting('target_type', 'user')
+      ->setTranslatable(TRUE);
+
+    $fields['revision_created'] = BaseFieldDefinition::create('created')
+      ->setLabel(t('Revision timestamp'))
+      ->setDescription(t('The time that the current revision was created.'))
+      ->setRevisionable(TRUE);
+
+    $fields['revision_log'] = BaseFieldDefinition::create('string_long')
+      ->setLabel(t('Revision log'))
+      ->setDescription(t('Briefly describe the changes in this revision.'))
+      ->setRevisionable(TRUE);
 
     return $fields;
   }

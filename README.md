@@ -49,7 +49,7 @@ See: https://www.drupal.org/node/895232 for further information.
 
 Current maintainers:
 
-- Christopher Peter Josephs (Digibitsymicronanocyberweb) - https://www.drupal.org/u/xis23
+- Christopher Peter Josephs (Digibitsy) - https://www.drupal.org/u/xiss23
 
 
 ###  Why choose a **Color Entity** over a **Color Field** to manage colors?
