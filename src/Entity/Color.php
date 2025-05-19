@@ -28,7 +28,9 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
   entity_keys: [
     'id' => 'cid',
     'label' => 'name',
-    'uuid' => 'uuid'
+    'uuid' => 'uuid',
+    'revision' => 'vid',
+
   ],
   handlers: [
     'view_builder' => EntityViewBuilder::class,
@@ -48,7 +50,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
     //  'html' => MediaRouteProvider::class,
     //  'revision' => RevisionHtmlRouteProvider::class,
     //],
-  ],
+  ], // Table to store revisions
   links: [
     "canonical" => "/admin/structure/colors/{color}",
     "add-form" => "/admin/structure/colors/add",
@@ -56,13 +58,22 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
     "delete-form" => "/admin/structure/colors/{color}/delete",
     "collection" => "/admin/structure/colors",
   ],
-  // admin_permission: "administer colors",
   base_table: 'color',
+  revision_table: 'color_revision',
+  revision_data_table: 'color_field_revision',
+  translatable: TRUE,
+  show_revision_ui: TRUE,
+  // admin_permission: "administer colors",
   label_count: [
     'singular' => '@count color',
     'plural' => '@count colors',
   ],
   field_ui_base_route: "entity.color.admin_form",
+  revision_metadata_keys: [
+    'revision_user' => 'revision_user',
+    'revision_created' => 'revision_created',
+    'revision_log_message' => 'revision_log_message',
+  ],
   )]
 
 class Color extends ContentEntityBase implements ColorInterface {
